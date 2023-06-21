@@ -11,9 +11,10 @@ public class random : MonoBehaviour
     public TMP_InputField minInputField;
     public TMP_InputField maxInputField;
     public TMP_InputField exInputField;
+    public TMP_InputField volInputField;
     public TextMeshProUGUI resultText;
 
-    public int min=0, max=1;
+    public int min=0, max=1,vol=1;
     public string ex;
     private List<int> list = new List<int>();
     private List<int> exList = new List<int>();
@@ -70,13 +71,33 @@ public class random : MonoBehaviour
 
     void result()
     {
-        //リストの1番目を結果として出力
-        resultText.text = list[0].ToString();
+        if (vol == 1)
+        {
+            resultText.fontSize = 72;
+            resultText.text = list[0].ToString();
+            return;
+        }
+
+        //リストのi番目までを結果として出力
+        string tmp="";
+        if(vol>list.Count) vol = list.Count;
+
+        
+        for(int i = 0; i < vol; i++)
+        {
+            if (i == 0) tmp += list[i].ToString();
+            else tmp += "," + list[i].ToString();
+        }
+
+
+        resultText.fontSize=72;
+        resultText.text = tmp;
     }
 
     public void OnClick()
     {
-        if(minInputField.text.Length == 0|| maxInputField.text.Length == 0)
+        resultText.fontSize = 50;
+        if (minInputField.text.Length == 0|| maxInputField.text.Length == 0)
         {
             resultText.text = "Please enter a value";
             resultText.color = Color.red;
@@ -86,6 +107,13 @@ public class random : MonoBehaviour
         resultText.color = Color.white;
         min = int.Parse(minInputField.text);
         max = int.Parse(maxInputField.text);
+
+        if (volInputField.text.Length == 0)
+        {
+            vol = 1;            
+        }
+        else vol = int.Parse(volInputField.text);
+
         ex = exInputField.text;
 
         exGen(ex);
@@ -104,6 +132,9 @@ public class random : MonoBehaviour
         minInputField = GameObject.Find("MinInput").GetComponent<TMP_InputField>();
         maxInputField = GameObject.Find("MaxInput").GetComponent<TMP_InputField>();
         exInputField = GameObject.Find("ExInput").GetComponent<TMP_InputField>();
+        volInputField = GameObject.Find("VolInput").GetComponent<TMP_InputField>();
+
+        resultText.fontSize = 50;
     }
 
     // Update is called once per frame
