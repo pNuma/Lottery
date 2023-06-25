@@ -20,6 +20,9 @@ public class random : MonoBehaviour
     private List<int> exList = new List<int>();
     private List<int> resultList = new List<int>();
 
+    private int upLimit = 9999;
+    private int lowLimit = -9999;
+
     //œŠOƒŠƒXƒg‚ðì‚é
     void exGen(string ex)
     {
@@ -73,7 +76,7 @@ public class random : MonoBehaviour
     {
         if (vol == 1)
         {
-            if (min >= 1000) resultText.fontSize = 72;
+            if (list.Max() >= 1000 || list.Min() <= -999) resultText.fontSize = 72;
             else resultText.fontSize = 140;
 
             resultText.text = list[0].ToString();
@@ -98,7 +101,7 @@ public class random : MonoBehaviour
             else tmp += "\n" + resultList[i].ToString();
         }
 
-        if (min >= 1000) resultText.fontSize = 72;
+        if (list.Max() >= 1000 || list.Min() <= -999)  resultText.fontSize = 72;
         else resultText.fontSize=140;
         resultText.text = tmp;
     }
@@ -113,9 +116,11 @@ public class random : MonoBehaviour
             return;
         }
 
+
         resultText.color = Color.white;
         min = int.Parse(minInputField.text);
         max = int.Parse(maxInputField.text);
+        ex = exInputField.text;
 
         if (volInputField.text.Length == 0)
         {
@@ -123,7 +128,18 @@ public class random : MonoBehaviour
         }
         else vol = int.Parse(volInputField.text);
 
-        ex = exInputField.text;
+
+        if (min > upLimit || min < lowLimit || max > upLimit || max < lowLimit || vol > 100 || vol < 1)
+        {
+            resultText.fontSize = 20;
+            resultText.text = "value range:\n" +
+                "-9999 <= min,max <= 9999 \n" +
+                "1 <= vol <= 99";
+            resultText.color = Color.red;
+            return;
+        }
+
+
 
         exGen(ex);
         listGen(min, max, exList);
