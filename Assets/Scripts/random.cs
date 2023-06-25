@@ -18,6 +18,7 @@ public class random : MonoBehaviour
     public string ex;
     private List<int> list = new List<int>();
     private List<int> exList = new List<int>();
+    private List<int> resultList = new List<int>();
 
     //除外リストを作る
     void exGen(string ex)
@@ -29,7 +30,6 @@ public class random : MonoBehaviour
             //除外する値が無ければ処理を終了
             if (ex.Length == 0)
             {
-                if (exList.Count == 0) exList.Add(-1);
                 break;
             }
 
@@ -41,7 +41,7 @@ public class random : MonoBehaviour
             }
             else
             {
-                tmp = tmp + ex[i];
+                tmp += ex[i];
             }
 
             i++;
@@ -73,7 +73,9 @@ public class random : MonoBehaviour
     {
         if (vol == 1)
         {
-            resultText.fontSize = 72;
+            if (min >= 1000) resultText.fontSize = 72;
+            else resultText.fontSize = 140;
+
             resultText.text = list[0].ToString();
             return;
         }
@@ -85,12 +87,19 @@ public class random : MonoBehaviour
         
         for(int i = 0; i < vol; i++)
         {
-            if (i == 0) tmp += list[i].ToString();
-            else tmp += "," + list[i].ToString();
+            resultList.Add(list[i]);
         }
 
+        resultList.Sort();
 
-        resultText.fontSize=72;
+        for (int i = 0; i < vol; i++)
+        {
+            if (i == 0) tmp += resultList[i].ToString();
+            else tmp += "\n" + resultList[i].ToString();
+        }
+
+        if (min >= 1000) resultText.fontSize = 72;
+        else resultText.fontSize=140;
         resultText.text = tmp;
     }
 
@@ -122,6 +131,7 @@ public class random : MonoBehaviour
 
         exList.Clear();
         list.Clear();
+        resultList.Clear();
     }
 
 
