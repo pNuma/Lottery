@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using TMPro;
 
-public class random : MonoBehaviour
+public class Random : MonoBehaviour
 {
     private TextMeshProUGUI textMeshProUGUI;
     public TMP_InputField minInputField;
@@ -24,7 +24,7 @@ public class random : MonoBehaviour
     private int lowLimit = -9999;
 
     //除外リストを作る
-    void exGen(string ex)
+    void ExGen(string ex)
     {
         int i = 0;
         string tmp="";
@@ -58,7 +58,7 @@ public class random : MonoBehaviour
     }
 
     //出現しうる値のリストを作成
-    void listGen(int min, int max, List<int> exList)
+    void ListGen(int min, int max, List<int> exList)
     {
 
         for (int i = min; i <= max; i++)
@@ -72,7 +72,7 @@ public class random : MonoBehaviour
         list = list.OrderBy(a => Guid.NewGuid()).ToList();
     }
 
-    void result()
+    void Result()
     {
         if (vol == 1)
         {
@@ -141,9 +141,9 @@ public class random : MonoBehaviour
 
 
 
-        exGen(ex);
-        listGen(min, max, exList);
-        result();
+        ExGen(ex);
+        ListGen(min, max, exList);
+        Result();
 
         exList.Clear();
         list.Clear();
