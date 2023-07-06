@@ -23,20 +23,20 @@ public class Random : MonoBehaviour
     private int upLimit = 9999;
     private int lowLimit = -9999;
 
-    //œŠOƒŠƒXƒg‚ğì‚é
+    //é™¤å¤–ãƒªã‚¹ãƒˆã‚’ä½œã‚‹
     void ExGen(string ex)
     {
         int i = 0;
         string tmp="";
         while (true)
         {
-            //œŠO‚·‚é’l‚ª–³‚¯‚ê‚Îˆ—‚ğI—¹
+            //é™¤å¤–ã™ã‚‹å€¤ãŒç„¡ã‘ã‚Œã°å‡¦ç†ã‚’çµ‚äº†
             if (ex.Length == 0)
             {
                 break;
             }
 
-            //ƒJƒ“ƒ}‹æØ‚è‚ğ”»’è
+            //ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã‚’åˆ¤å®š
             if(ex[i] == ',')
             {
                 exList.Add(int.Parse(tmp));                
@@ -57,18 +57,18 @@ public class Random : MonoBehaviour
         }
     }
 
-    //oŒ»‚µ‚¤‚é’l‚ÌƒŠƒXƒg‚ğì¬
+    //å‡ºç¾ã—ã†ã‚‹å€¤ã®ãƒªã‚¹ãƒˆã‚’ä½œæˆ
     void ListGen(int min, int max, List<int> exList)
     {
 
         for (int i = min; i <= max; i++)
         {
-            //œŠOƒŠƒXƒg‚É’l(i)‚ª‚ ‚ê‚Îˆ—‚ğ”ò‚Î‚·
+            //é™¤å¤–ãƒªã‚¹ãƒˆã«å€¤(i)ãŒã‚ã‚Œã°å‡¦ç†ã‚’é£›ã°ã™
             if (exList.Contains(i)) continue;
             else list.Add(i);
         }
 
-        //ƒŠƒXƒg‚ğƒVƒƒƒbƒtƒ‹
+        //ãƒªã‚¹ãƒˆã‚’ã‚·ãƒ£ãƒƒãƒ•ãƒ«
         list = list.OrderBy(a => Guid.NewGuid()).ToList();
     }
 
@@ -83,7 +83,7 @@ public class Random : MonoBehaviour
             return;
         }
 
-        //ƒŠƒXƒg‚Ìi”Ô–Ú‚Ü‚Å‚ğŒ‹‰Ê‚Æ‚µ‚Äo—Í
+        //ãƒªã‚¹ãƒˆã®iç•ªç›®ã¾ã§ã‚’çµæœã¨ã—ã¦å‡ºåŠ›
         string tmp="";
         if(vol>list.Count) vol = list.Count;
 
