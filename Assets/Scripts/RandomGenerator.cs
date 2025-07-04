@@ -116,13 +116,11 @@ public class RandomGenerator : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Displays an error message in red text.
+
+    // エラーを表示
     private void DisplayError(string message)
     {
         resultText.color = Color.red;
-        
-        // Adjust font size for specific error messages
         if (message.Contains("value range"))
         {
             resultText.fontSize = 20;
