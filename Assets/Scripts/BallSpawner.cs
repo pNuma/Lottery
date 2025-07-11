@@ -3,33 +3,19 @@ using UnityEngine;
 public class BallSpawner : MonoBehaviour
 {
     public GameObject ballPrefab;
-    
-    public float spawnInterval = 1.0f;
-    
-    public float spawnPositionWidth = 2.0f; 
+    public float spawnInterval = 0.2f;
+    public float spawnPositionWidth = 2.0f;
 
-    private float timer = 0f;
-
-    void Update()
+    public void SpawnBall(int number)
     {
-        // テスト用
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnBall();
-        }
-    }
-
-    void SpawnBall()
-    {
+        if (ballPrefab == null) return;
 
         float randomX = Random.Range(-spawnPositionWidth / 2, spawnPositionWidth / 2);
         Vector3 spawnPosition = transform.position + new Vector3(randomX, 0, 0);
-        GameObject newBall = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
-        
-        Ball ballScript = newBall.GetComponent<Ball>();
+        GameObject newBallObject = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
 
-        int randomNumber = Random.Range(1, 100);
-        ballScript.SetNumber(randomNumber);
+        Ball ballScript = newBallObject.GetComponent<Ball>();
+        ballScript.SetNumber(number);
         
     }
 }

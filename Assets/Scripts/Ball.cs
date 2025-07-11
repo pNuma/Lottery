@@ -8,14 +8,8 @@ public class Ball : MonoBehaviour
 
     void Awake()
     {
-
         textMeshPro = GetComponentInChildren<TextMeshPro>();
-        if (textMeshPro == null)
-        {
-            Debug.LogError("TextMeshPro component not found in children!");
-        }
     }
-
 
     public void SetNumber(int num)
     {
@@ -23,6 +17,15 @@ public class Ball : MonoBehaviour
         if (textMeshPro != null)
         {
             textMeshPro.text = number.ToString();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DestroyZone"))
+        {
+            RandomGenerator.Instance.OnNumberFinished(number);
+            Destroy(gameObject);
         }
     }
 }

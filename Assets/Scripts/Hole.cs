@@ -6,8 +6,12 @@ public class Hole : MonoBehaviour
     {
         if (other.CompareTag("Ball"))
         {
-            // 入ったボールを消す
-            Destroy(other.gameObject, 0.1f);
+            Ball ball = other.GetComponent<Ball>();
+            RandomGenerator.Instance.ReportWinningNumber(ball.number);
+            RandomGenerator.Instance.OnNumberFinished(ball.number);
+
+            other.gameObject.SetActive(false);
+            Destroy(other.gameObject, 2.0f);
         }
     }
 }
