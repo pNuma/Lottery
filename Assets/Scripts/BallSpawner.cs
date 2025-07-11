@@ -2,29 +2,34 @@ using UnityEngine;
 
 public class BallSpawner : MonoBehaviour
 {
-public GameObject ballPrefab;
-public float spawnInterval = 1.0f;
-private float timer = 0f;
+    public GameObject ballPrefab;
+    
+    public float spawnInterval = 1.0f;
+    
+    public float spawnPositionWidth = 2.0f; 
 
-void Update()
-{
-    timer += Time.deltaTime;
-    if (Input.GetKeyDown(KeyCode.Space) && timer >= spawnInterval)
+    private float timer = 0f;
+
+    void Update()
     {
-        SpawnBall();
-        timer = 0f;
+        // テスト用
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnBall();
+        }
     }
-}
 
-void SpawnBall()
-{
-    if (ballPrefab != null)
+    void SpawnBall()
     {
-        GameObject newBall = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+
+        float randomX = Random.Range(-spawnPositionWidth / 2, spawnPositionWidth / 2);
+        Vector3 spawnPosition = transform.position + new Vector3(randomX, 0, 0);
+        GameObject newBall = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+        
         Ball ballScript = newBall.GetComponent<Ball>();
 
-            int randomNumber = Random.Range(1, 100); // 例として1から99の乱数を生成
-            ballScript.SetNumber(randomNumber);     
+        int randomNumber = Random.Range(1, 100);
+        ballScript.SetNumber(randomNumber);
+        
     }
-}
 }
