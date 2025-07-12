@@ -24,8 +24,12 @@ public class RandomGenerator : MonoBehaviour
     private List<int> winningNumbers = new List<int>();
     private int targetVolume;
 
+    public bool isAccepting { get; private set; }
+
     private void Awake()
     {
+        isAccepting = false;
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -64,6 +68,8 @@ public class RandomGenerator : MonoBehaviour
                 DisplayWinningResults();
             }
         }
+
+        isAccepting = true; 
     }
     
     // 当たり数に達するまでボールを生成
@@ -82,8 +88,13 @@ public class RandomGenerator : MonoBehaviour
             
             yield return new WaitForSeconds(ballSpawner.spawnInterval);
         }
-        
-        DisplayMessage("Done!");
+
+        // 設定した数に達したらボールの生成を停止
+        if (winningNumbers.Count >= targetVolume)
+        {
+            isAccepting = false;
+            StopAllCoroutines();
+        }
     }
 
     private int? FindAvailableNumber(int min, int max, HashSet<int> excludeSet)
