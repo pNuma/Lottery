@@ -4,6 +4,8 @@
 # ビルド関連ファイル/フォルダは無視しない
 !/index.html
 !/Build/
+!/Build/**
 !/TemplateData/
+!/TemplateData/**
 !/.gitignore
 !/README.md
