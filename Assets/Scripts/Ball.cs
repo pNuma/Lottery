@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     public void SetNumber(int num)
     {
         number = num;
+        
         if (textMeshPro != null)
         {
             textMeshPro.text = number.ToString();
