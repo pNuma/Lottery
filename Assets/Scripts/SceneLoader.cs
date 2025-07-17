@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // この行が必須
+using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
